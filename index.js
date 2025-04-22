@@ -5,14 +5,21 @@ let daftarFilm = [];
 
 async function getMovie(){
     const keyWord = document.getElementById("input").value.toLowerCase()
-    // if(!keyWord) return alert("Masukan Judul Film!")
+    if(keyWord.length === 0) return alert("Masukan Judul Film!")
     try{
         const response = await fetch(`http://www.omdbapi.com/?apikey=${apiKey}&s=${keyWord}`) 
         const data = await response.json()
+        console.info(data)
         if(!response.ok){
-            daftarFilm = [];
             throw new Error(`Error : ${response.statusText}`)
         }
+        
+        if(data.Response == "False"){
+            filmContainer.innerHTML = `<p class="text-2xl">❌ Film Tidak Ditemukan</p>`
+            daftarFilm = [];
+            return
+        }
+        
         daftarFilm = data.Search
         boxContent(daftarFilm) // tampilkan filmm
         info.textContent =""
@@ -40,11 +47,17 @@ function filterTahun(){
     const tahun = daftarFilm.filter(data => data.Year > 2010);
     boxContent(tahun)
     info.textContent = `🚀 ${tahun.length} Film di tampilkan setelah filter`
+
+    if(daftarFilm.length == 0){
+        info.innerHTML = `<p class="text-2xl">❌ Tidak ada film yang terFilter</p>`
+    }
 }
 
 function totalFilm(){
     const total = daftarFilm.length
     const totalFilm = daftarFilm.reduce((acc,data) => acc + ", " + data.Title, " ").slice(2);
-
     info.textContent = `📊 ${total} Film di tampilkan: ${totalFilm}`
+    if(totalFilm.length == 0){
+        info.innerHTML = `<p class="text-2xl">❌ Tidak ada film</p>`
+    }
 }
