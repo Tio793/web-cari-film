@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎬Cari film Fav</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-slate-100">
+    <h1 class="text-4xl font-semibold mx-auto my-10 text-center">Cari film Favorite Mu 🎬</h1>
+
+    <div class="flex justify-center flex-wrap xl:gap-x-2 gap-3 mb-10">
+      <input type="text" id="input" placeholder="Cari film..." class="border-2 xl:p-1 p-3 rounded-sm">
+      <button id="search" type="button" onclick="getMovie()" class="border-2 xl:p-1 p-3 rounded-sm cursor-pointer">Cari</button>
+      <button type="button" onclick="filterTahun()" class="border-2 xl:p-1 p-3 rounded-sm cursor-pointer">Filter film di atas tahun 2010</button>
+      <button type="button" onclick="totalFilm()" class="border-2 xl:p-1 p-3 rounded-sm cursor-pointer">Total film gabungkan judul</button>
+    </div>
+
+    <div id="info" class="text-center text-2xl mt-10 mb-4"></div>
+    <div id="content" class="flex justify-center items-center gap-5 flex-wrap px-2"></div>
+    
+    <script src="index.js"></script>
+</body>
+</html>
